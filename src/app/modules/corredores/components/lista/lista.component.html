@@ -1,4 +1,4 @@
-<p-table [value]="corredores" dataKey="nombre" responsiveLayout="scroll" [style]="{'margin-bottom': '20px','margin-top': '20px'}">
+<p-table [value]="corredores"  dataKey="nombre" responsiveLayout="scroll" [style]="{'margin-bottom': '20px','margin-top': '20px'}">
     <!-- <ng-template pTemplate="header">
         <tr>
             <th style="width: 3rem"></th>
@@ -21,7 +21,7 @@
                         <ng-template pTemplate="header">
                             <tr>
                         
-                                <th pSortableColumn="rutas.placa">Id </th>
+                                <!-- <th pSortableColumn="rutas.placa">Id </th> -->
                                 <th pSortableColumn="descripcion">Ruta </th>
                                 <th pSortableColumn="estado">Estado</th>
                                 <th style="width: 4rem"></th> 
@@ -30,7 +30,7 @@
                         </ng-template>
                         <ng-template pTemplate="body" let-rutas>
                             <tr>
-                                <td>{{rutas.idRuta}}</td>
+                                <!-- <td>{{rutas.idRuta}}</td> -->
                                 <td>{{rutas.descripcion}}</td>
                                 <td>{{rutas.estado}}</td>
                                 <!-- <td>{{order.id}}</td>

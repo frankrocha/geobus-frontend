@@ -1,0 +1,16 @@
+
+<p-table [value]="listarifas" responsiveLayout="scroll" [style]="{'margin-bottom': '20px','margin-top': '20px'}">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Tarifa</th>
+            <th>Monto</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-tarifa>
+        <tr>
+            <td>{{tarifa.tipoTarifa}}</td>
+            <td>{{tarifa.monto}}</td>
+
+        </tr>
+    </ng-template>
+</p-table>

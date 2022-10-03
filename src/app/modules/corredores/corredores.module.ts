@@ -27,11 +27,15 @@ import {TabViewModule} from 'primeng/tabview';
 import {GMapModule} from 'primeng/gmap';
 import {ToastModule} from 'primeng/toast';
 import {DialogModule} from 'primeng/dialog';
+import { RutaComponent } from './components/ruta/ruta.component';
+
+
 
 
 @NgModule({
   declarations: [
-    ListaComponent
+    ListaComponent,
+    RutaComponent
   ],
   imports: [
     CommonModule,

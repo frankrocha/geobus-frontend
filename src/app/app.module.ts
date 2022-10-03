@@ -29,6 +29,7 @@ import { MapComponent } from './components/map/map.component';
 import {ToastModule} from 'primeng/toast';
 import {DialogModule} from 'primeng/dialog';
 import { HttpClientModule } from '@angular/common/http';
+
     
 
 
@@ -37,7 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     MenuComponent,
-    MapComponent
+    MapComponent,
   ],
   imports: [
     BrowserAnimationsModule,

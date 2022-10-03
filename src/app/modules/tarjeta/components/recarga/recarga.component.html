@@ -1,0 +1,110 @@
+<ng-template [ngIf]="show">
+    <p-panel header="Recargar tarjeta" [style]="{'margin-bottom': '20px','margin-top': '20px'}" *ngIf="tarjeta">
+        <div class="grid p-fluid">
+            <div class="grid p-fluid col-12 md:col-8">
+                <div class="col-12 md:col-12">
+                    <span>Datos de la Tarjeta</span>
+                </div>
+                
+                <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">N° Tarjeta</span>
+                        <input type="text" pInputText [disabled]="true" [(ngModel)]="tarjeta.nroTarjeta">         
+                    </div>
+                 </div> 
+                 <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">Tipo Tarjeta</span>
+                        <input type="text" pInputText  [disabled]="true" [value]="tarjeta.tipoTarjeta">         
+                    </div>
+                 </div> 
+                 <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">Estado</span>
+                        <input type="text" pInputText  [disabled]="true" [value]="tarjeta.estado">         
+                    </div>
+                 </div> 
+                 <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">Saldo</span>
+                        <input type="text" pInputText  [disabled]="true" [value]="'S/. '+tarjeta.saldo">         
+                    </div>
+                 </div> 
+                 <div class="col-12 md:col-12">
+                    <span>Datos del usuario</span>
+                 </div>
+              
+                 <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">Nombres</span>
+                        <input type="text" pInputText  [disabled]="true" [value]="usuario.nombres+' '+usuario.apellidos">         
+                    </div>
+                 </div> 
+                 <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">DNI</span>
+                        <input type="text" pInputText  [disabled]="true" [value]="usuario.dni">         
+                    </div>
+                 </div> 
+                 <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">Correo</span>
+                        <input type="text" pInputText  [disabled]="true" [value]="usuario.correo">         
+                    </div>
+                 </div> 
+            </div>
+            <div class="col-12 md:col-4">   
+                
+                <p-card  [style]="{'width': '25rem', 'margin-top': '2em'}">
+                   <ng-template pTemplate="content" >
+                        <img alt="Card" [style]="{'width': '100%', 'height ': '100%'}" src="assets/imagenes/card3.png">
+                    </ng-template> 
+                 
+                </p-card>
+            </div>
+    
+        </div>
+        <div class="grid p-fluid" id="recargarForm"  [formGroup]="recargarForm" name="recargarForm">
+            <!-- <div class="col-12 md:col-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-credit-card"></i></span>
+                    <input type="text" pInputText placeholder="Numero de tarjeta" formControlName="numTarjeta">         
+                </div>
+            </div> -->
+            <div class="col-12 md:col-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
+                    <input type="text" pInputText placeholder="monto" formControlName="monto">         
+                </div>
+            </div>
+            <!-- <div class="col-12 md:col-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
+                    <input type="text" pInputText placeholder="Correo" formControlName="correo">         
+                </div>
+            </div>
+      -->
+    
+            <div class="col-12 md:col-4">
+                <div class="p-inputgroup">
+                    <p-confirmDialog [style]="{width: '30vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+                    <button pButton pRipple type="button" label="Recargar" (click)="confirm(usuario.correo,tarjeta.nroTarjeta)" class="p-button-raised p-button-success"></button> 
+                    <p-progressSpinner *ngIf="displaySpinner" [style]="{width: '30px', height: '30px'}" styleClass="custom-spinner" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>     
+                </div>
+            </div> 
+        </div>
+        
+        <p-dialog header="Mensaje" [(visible)]="displayModal" [modal]="true" [style]="{width: '30vw'}"
+        [draggable]="false" [resizable]="false">
+        <p class="m-0" >{{respuestaRecarga.mensaje}}</p>
+            <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
+             </ng-template>
+        </p-dialog>
+    
+    </p-panel>
+    <p-toast></p-toast>
+</ng-template>
+
+  
+

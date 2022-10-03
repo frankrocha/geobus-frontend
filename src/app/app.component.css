@@ -1,0 +1,10 @@
+:host ::ng-deep .p-panel .p-panel-header {
+    /* width: 914px ;  */
+    height: 38px;
+    /* padding: 2px 2px 2px 15px;A */
+    /* border-radius: 4px; */
+    border: 1px solid #5D6D7E;
+    background-color: #5D6D7E;
+    color: #ffffff;
+    font-size: 14px;
+  }

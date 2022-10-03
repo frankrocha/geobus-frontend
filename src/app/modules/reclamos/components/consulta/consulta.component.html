@@ -1,2 +1,58 @@
+<div class="grid p-fluid" >
+    <div class="col-12 md:col-6">
+        <div class="p-inputgroup"  id="reclamoForm"  [formGroup]="reclamoForm" name="reclamoForm">
+            <input type="text" pInputText placeholder="Escriba el numero de su tarjeta" formControlName="idReclamo" >   
+            <button type="button" pButton pRipple icon="pi pi-check" (click)="consultarInfo()"  styleClass="p-button-warn"></button>      
+        </div>
+    </div>
+    
+    <div class="col-12 md:col-6">
+        <ng-template [ngIf]="showInfo">
+            <div class="grid p-fluid">
+                <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">Descripcion</span>
+                        <input type="text" pInputText  [disabled]="true" [value]="reclamo.descripcion">         
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">Estado</span>
+                        <input type="text" pInputText  [disabled]="true" [value]="reclamo.estado">         
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">DNI</span>
+                        <input type="text" pInputText  [disabled]="true" [value]="reclamo.dni">         
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">Teléfono</span>
+                        <input type="text" pInputText  [disabled]="true" [value]="reclamo.telefono">         
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">Correo</span>
+                        <input type="text" pInputText  [disabled]="true" [value]="reclamo.correo">         
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">Razón Social</span>
+                        <input type="text" pInputText  [disabled]="true" [value]="reclamo.nombreRazonSocial">         
+                    </div>
+                </div>
+            </div>
+        </ng-template>
 
-<p>consulta works!</p>
+    </div>
+    <!-- <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">$</span>  
+            <span class="p-inputgroup-addon">.00</span>      
+        </div>
+    </div> -->
+</div>

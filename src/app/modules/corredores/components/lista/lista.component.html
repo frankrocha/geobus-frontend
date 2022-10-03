@@ -1,52 +1,54 @@
-<p-table [value]="corredores"  dataKey="nombre" responsiveLayout="scroll" [style]="{'margin-bottom': '20px','margin-top': '20px'}">
-    <!-- <ng-template pTemplate="header">
-        <tr>
-            <th style="width: 3rem"></th>
-            <th pSortableColumn="nombre">Nombre<p-sortIcon field="nombre"></p-sortIcon></th>
-        </tr>
-    </ng-template> -->
-    <ng-template pTemplate="body" let-corredor let-expanded="expanded">
-        <tr>
-            <td>
-                <button type="button" pButton pRipple [pRowToggler]="corredor" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-            </td>
-            <td>{{corredor.nombre}}</td>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="rowexpansion" let-corredor rowExpandMode="single">
-        <tr>
-            <td colspan="7">
-                <div class="p-3">
-                    <p-table [value]="corredor.rutas" dataKey="id">
-                        <ng-template pTemplate="header">
-                            <tr>
-                        
-                                <!-- <th pSortableColumn="rutas.placa">Id </th> -->
-                                <th pSortableColumn="descripcion">Ruta </th>
-                                <th pSortableColumn="estado">Estado</th>
-                                <th style="width: 4rem"></th> 
-                               
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-rutas>
-                            <tr>
-                                <!-- <td>{{rutas.idRuta}}</td> -->
-                                <td>{{rutas.descripcion}}</td>
-                                <td>{{rutas.estado}}</td>
-                                <!-- <td>{{order.id}}</td>
-                                <td>{{order.amount | currency:'USD'}}</td>
-                                <td><span [class]="'order-badge order-' + order.status.toLowerCase()">{{order.status}}</span></td> -->
-                             <td><p-button type="button" >Ver</p-button></td>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="emptymessage">
-                            <tr>
-                                <td colspan="6">There are no order for this product yet.</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                </div>
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
+<p-panel header="Corredores" [style]="{'margin-bottom': '20px','margin-top': '20px'}">
+    <p-table [value]="corredores"  dataKey="nombre" responsiveLayout="scroll" [style]="{'margin-bottom': '20px','margin-top': '20px'}">
+        <!-- <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem"></th>
+                <th pSortableColumn="nombre">Nombre<p-sortIcon field="nombre"></p-sortIcon></th>
+            </tr>
+        </ng-template> -->
+        <ng-template pTemplate="body" let-corredor let-expanded="expanded">
+            <tr>
+                <td>
+                    <button type="button" [style]="{'background-color':corredor.color}" pButton pRipple [pRowToggler]="corredor" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                </td>
+                <td>{{corredor.nombre}}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-corredor rowExpandMode="single">
+            <tr>
+                <td colspan="7">
+                    <div class="p-3">
+                        <p-table [value]="corredor.rutas" dataKey="id">
+                            <ng-template pTemplate="header">
+                                <tr>
+                            
+                                    <!-- <th pSortableColumn="rutas.placa">Id </th> -->
+                                    <th pSortableColumn="descripcion">Ruta </th>
+                                    <th pSortableColumn="estado">Estado</th>
+                                    <th style="width: 4rem"></th> 
+                                   
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rutas>
+                                <tr>
+                                    <!-- <td>{{rutas.idRuta}}</td> -->
+                                    <td>{{rutas.descripcion}}</td>
+                                    <td>{{rutas.estado}}</td>
+                                    <!-- <td>{{order.id}}</td>
+                                    <td>{{order.amount | currency:'USD'}}</td>
+                                    <td><span [class]="'order-badge order-' + order.status.toLowerCase()">{{order.status}}</span></td> -->
+                                 <td><p-button type="button" (onClick)="verRuta(rutas.idRuta,rutas.descripcion)" >Ver</p-button></td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="6">There are no order for this product yet.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-panel>

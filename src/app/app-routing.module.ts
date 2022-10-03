@@ -15,8 +15,12 @@ const routes: Routes = [
     path: 'tarifas',
     loadChildren: () => import('./modules/tarifas/tarifas.module').then(m =>m.TarifasModule)
   },
-  {path:'inicio',component: MapComponent},
-  {path:'**',redirectTo: 'inicio'}
+  {
+    path: 'tarjetas',
+    loadChildren: () => import('./modules/tarjeta/tarjeta.module').then(m =>m.TarjetaModule)
+  },
+  // {path:'inicio',component: MapComponent},
+  {path:'**',redirectTo: 'corredores'}
 
 ];
 

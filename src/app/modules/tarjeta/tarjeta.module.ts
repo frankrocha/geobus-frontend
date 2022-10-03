@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ReclamosRoutingModule } from './reclamos-routing.module';
-import { ConsultaComponent } from './components/consulta/consulta.component';
+import { TarjetaRoutingModule } from './tarjeta-routing.module';
+import { MainComponent } from './components/main/main.component';
 
 import {FormsModule} from '@angular/forms';
 
@@ -26,23 +26,21 @@ import {DialogModule} from 'primeng/dialog';
 import {SkeletonModule} from 'primeng/skeleton';
 
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-
+import { RecargaComponent } from './components/recarga/recarga.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
-import { RegistrarComponent } from './components/registrar/registrar.component';
-import { MainComponent } from './components/main/main.component';
+
 
 @NgModule({
   declarations: [
-    ConsultaComponent,
-    RegistrarComponent,
-    MainComponent
+    MainComponent,
+    RecargaComponent
   ],
   imports: [
     CommonModule,
-    ReclamosRoutingModule,
+    TarjetaRoutingModule,
 
-
+    CalendarModule,
     PanelModule,
     CardModule,
     CascadeSelectModule,
@@ -64,4 +62,4 @@ import { MainComponent } from './components/main/main.component';
     ProgressSpinnerModule
   ]
 })
-export class ReclamosModule { }
+export class TarjetaModule { }

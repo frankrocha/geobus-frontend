@@ -8,11 +8,13 @@ const routes: Routes = [
     children:[
       {path:'main',component: MainComponent},
     ]
+
   }
+
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ReclamosRoutingModule { }
+export class TarjetaRoutingModule { }

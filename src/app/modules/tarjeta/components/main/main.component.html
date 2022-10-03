@@ -1,0 +1,21 @@
+
+
+    <p-panel header="Consulta Saldo" [style]="{'margin-bottom': '20px','margin-top': '20px'}">
+        <div class="grid p-fluid" >
+            <div class="col-12 md:col-4">
+                <div class="p-inputgroup"  id="recargarForm"  [formGroup]="tarjetaForm" name="recargarForm">
+                    <input type="text" pInputText placeholder="Escriba el numero de su tarjeta" formControlName="numTarjeta" >   
+                    <button type="button" pButton pRipple icon="pi pi-check" (click)="consultarInfo()"  styleClass="p-button-warn"></button>      
+                </div>
+            </div>
+            <!-- <div class="col-12 md:col-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">$</span>  
+                    <span class="p-inputgroup-addon">.00</span>      
+                </div>
+            </div> -->
+        </div>
+    </p-panel>
+    <app-recarga #child></app-recarga>
+
+

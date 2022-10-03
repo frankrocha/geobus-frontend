@@ -1,0 +1,34 @@
+<div class="p-fluid formgrid grid" id="reclamoFrom"  [formGroup]="reclamoFrom" name="reclamoFrom">
+
+    <div class="field col-12 md:col-4">
+        <label for="class">Descripcion</label>
+        <input type="text" pInputText formControlName="descripcion">         
+    </div>
+    <div class="field col-12 md:col-4">
+        <label for="wagon">Correo</label>
+        <input type="text" pInputText formControlName="correo" >    
+    </div>
+    <div class="field col-12 md:col-4">
+        <label for="class">Teléfono</label>
+        <input type="text" pInputText formControlName="telefono">         
+    </div>
+    <div class="field col-12 md:col-4">
+        <label for="wagon">DNI</label>
+        <input type="text" pInputText formControlName="dni">    
+    </div>
+    <div class="field col-12 md:col-4">
+        <label for="class">Razón Social</label>
+        <input type="text" pInputText formControlName="razonSocial">         
+    </div> 
+  
+</div>
+<p-dialog header="Mensaje" [(visible)]="displayModal" [modal]="true" [style]="{width: '30vw'}"
+[draggable]="false" [resizable]="false">
+<p class="m-0" >{{messageReponse.mensaje}}</p>
+    <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
+     </ng-template>
+</p-dialog>
+<p-confirmDialog [style]="{width: '30vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+<button pButton pRipple type="button" label="Registrar" (click)="confirm()" class="p-button-raised p-button-success"></button>         
+<p-toast></p-toast>

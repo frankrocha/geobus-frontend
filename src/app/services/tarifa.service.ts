@@ -30,7 +30,6 @@ export class TarifaService {
        console.log(resp)
       this.listaTarifas.next(resp)
           this.tarifas=resp
-         
      })
   }
 

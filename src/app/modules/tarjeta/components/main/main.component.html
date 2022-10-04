@@ -4,7 +4,7 @@
         <div class="grid p-fluid" >
             <div class="col-12 md:col-4">
                 <div class="p-inputgroup"  id="recargarForm"  [formGroup]="tarjetaForm" name="recargarForm">
-                    <input type="text" pInputText placeholder="Escriba el numero de su tarjeta" formControlName="numTarjeta" >   
+                    <p-inputNumber  inputId="withoutgrouping" placeholder="Escriba el numero de su tarjeta" formControlName="numTarjeta" [useGrouping]="false" ></p-inputNumber> 
                     <button type="button" pButton pRipple icon="pi pi-check" (click)="consultarInfo()"  styleClass="p-button-warn"></button>      
                 </div>
             </div>
@@ -17,5 +17,6 @@
         </div>
     </p-panel>
     <app-recarga #child></app-recarga>
+    <p-toast></p-toast>
 
 

@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Corredor } from '../model/Corredor';
 import { environment } from 'src/environments/environment';
+import { catchError, map,retry, throwError } from 'rxjs';
 import { Constantes } from '../utils/constantes';
 import { RutaLongitud } from '../model/RutaLongitud';
 import { Subject, Observable } from 'rxjs';
@@ -24,7 +25,15 @@ export class CorredorService {
 
   getCorredores(): Observable<Corredor[]>{
     const ruta = environment.urlBase + Constantes.LISTA_CORREDORES_RUTAS
-    return this.http.get<Corredor[]>(ruta) 
+    return this.http.get<any>(ruta).pipe(
+      map((item:Corredor[]) => {
+        return item
+      }),
+      catchError((error:HttpErrorResponse)=>{
+        console.log("error",error)
+        return throwError(error)
+      })
+    )
   }
 
 
@@ -41,7 +50,15 @@ export class CorredorService {
 
   private httpObtenerRuta(nroRuta:number):Observable<RutaLongitud[]>{
     const ruta = environment.urlBase + Constantes.LISTA_RUTAS_LONGITUDES
-    return this.http.get<RutaLongitud[]>(ruta+nroRuta)
+    return this.http.get<any>(ruta+nroRuta).pipe(
+      map((item:RutaLongitud[]) => {
+        return item
+      }),
+      catchError((error:HttpErrorResponse)=>{
+        console.log("error",error)
+        return throwError(error)
+      })
+    )
   }
 
   

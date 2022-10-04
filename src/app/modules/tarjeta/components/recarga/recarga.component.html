@@ -74,8 +74,10 @@
             <div class="col-12 md:col-4">
                 <div class="p-inputgroup">
                     <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
-                    <input type="text" pInputText placeholder="monto" formControlName="monto">         
-                </div>
+                    <p-inputNumber  inputId="currency-us" mode="currency" currency="PEN" locale="en-US" placeholder="monto" formControlName="monto"   >         
+                    </p-inputNumber>
+      
+                 </div>
             </div>
             <!-- <div class="col-12 md:col-4">
                 <div class="p-inputgroup">
@@ -103,8 +105,10 @@
         </p-dialog>
     
     </p-panel>
-    <p-toast></p-toast>
+
 </ng-template>
+
+<p-toast></p-toast>
 
   
 

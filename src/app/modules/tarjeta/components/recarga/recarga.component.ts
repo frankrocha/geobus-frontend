@@ -16,6 +16,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   providers: [ConfirmationService,MessageService]
 })
 export class RecargaComponent implements OnInit {
+  submitted: boolean = false
   show!:boolean
   showSpinner!:boolean
   recargarForm!: FormGroup
@@ -41,47 +42,62 @@ export class RecargaComponent implements OnInit {
   
     this.tarjetaService.tarjeta$.subscribe((resp:Tarjeta)=>{
       console.log("el dato que esta esperando",resp)
-      this.tarjeta=resp
-      this.usuarioService.getUsuario(resp.idUsuario).subscribe((resp:Usuario)=>{
-        this.usuario=resp
-        this.show=true
-        console.log("El usuario",resp)
-      })
+      // this.show=true
+      if (resp!=null){
+        this.tarjeta=resp
+        this.usuarioService.getUsuario(resp.idUsuario).subscribe((resp:Usuario)=>{
+          this.usuario=resp
+          this.show=true
+          console.log("El usuario",resp)
+        })
+      }else{
+        console.log("La tarjeta no existe")
+        this.messageService.add({severity: 'warn', detail:'No existe la tarjeta'});
+      }
+     
+
     })
 
 
   }
 
   confirm(correo:string,numtarjeta:string) {
-    this.confirmationService.confirm({
-      message: '¿Seguro que quire recargar?',
-      header: 'Comfirmación',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-          this.displaySpinner=true
-          const obj = new RecargaRequest()
-          obj.monto=this.frmCtrlMonto.value
-          obj.nroTarjeta=numtarjeta
-          obj.correo=correo
-          this.tarjetaService.recargaTarjeta(obj).subscribe((resp:MessageReponse)=>{
-            this.respuestaRecarga=resp
-            this.displaySpinner=false
-            this.displayModal=true
-            console.log("respuesta",resp)
-          })
-          this.messageService.add({severity:'info', summary:'Confirmed', detail:'You have accepted'});
-      },
-      reject: (type:any) => {
-        switch(type) {
-            case ConfirmEventType.REJECT:
-                this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
-            break;
-            case ConfirmEventType.CANCEL:
-                this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
-            break;
+    if(this.frmCtrlMonto.value!=null){
+      this.confirmationService.confirm({
+        message: '¿Seguro que quire recargar?',
+        header: 'Comfirmación',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+            this.displaySpinner=true
+            const obj = new RecargaRequest()
+            obj.monto=this.frmCtrlMonto.value
+            obj.nroTarjeta=numtarjeta
+            obj.correo=correo
+            this.tarjetaService.recargaTarjeta(obj).subscribe((resp:MessageReponse)=>{
+              this.respuestaRecarga=resp
+              this.displaySpinner=false
+              this.displayModal=true
+              console.log("respuesta",resp)
+            })
+            this.messageService.add({severity:'info', summary:'Confirmed', detail:'You have accepted'});
+        },
+        reject: (type:any) => {
+          switch(type) {
+              case ConfirmEventType.REJECT:
+                  this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
+              break;
+              case ConfirmEventType.CANCEL:
+                  this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
+              break;
+          }
         }
-      }
-    });
+      });
+
+    }else{
+      console.log("La tarjeta no existe")
+      this.messageService.add({severity: 'warn', detail:'Ingrese el monto'});
+    }
+
   }
 
   get frmCtrlMonto() : AbstractControl {

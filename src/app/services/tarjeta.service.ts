@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -7,6 +7,7 @@ import { MessageReponse } from '../model/MessageReponse';
 import { RecargaRequest } from '../model/RecargaRequest';
 import { Tarjeta } from '../model/Tarjeta';
 import { Constantes } from '../utils/constantes';
+import { catchError, map,retry, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -36,13 +37,21 @@ export class TarjetaService {
     const ruta = environment.urlBase + Constantes.RECARGAR_TARJETA
     console.log("recargaRequestssssss",recargaRequest)
     console.log("la uri",recargaRequest)
-    return this.http.post<MessageReponse>(ruta,recargaRequest)
+    return this.http.post<any>(ruta,recargaRequest).pipe(
+      map((item:MessageReponse) => {
+        return item
+      }),
+      catchError((error:HttpErrorResponse)=>{
+        console.log("error",error)
+        return throwError(error)
+      })
+    )
   }
 
-  enviarCorreo (email:Email):Observable<string>{
-    const ruta = environment.urlBase + Constantes.ENVIAR_CORREO
-    return this.http.post<string>(ruta,email)
-  }
+  // enviarCorreo (email:Email):Observable<string>{
+  //   const ruta = environment.urlBase + Constantes.ENVIAR_CORREO
+  //   return this.http.post<string>(ruta,email)
+  // }
 
 
 

@@ -32,39 +32,45 @@ export class RegistrarComponent implements OnInit {
   }
 
   confirm(){
-
-    console.log("Entro")
-    this.confirmationService.confirm({
-      message: '¿Seguro que quire registrar?',
-      header: 'Comfirmación',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => { 
-        let obj= new ReclamoRequest
-        obj.descripcion=this.frmCtrlDescripcion.value
-        obj.correo=this.frmCtrlCorreo.value
-        obj.dni=this.frmCtrlDni.value
-        obj.nameRazonSocial=this.frmCtrlRazonSocial.value
-        obj.telefono=this.frmCtrlTelefono.value
-        obj.estado="Pendiente"
-        this.reclamoService.registrarReclamo(obj).subscribe((resp:MessageReponse)=>{
-          this.messageReponse=resp
-          console.log("respuesta registro de reclamo",resp)
-          this.displayModal=true
-        })
-          this.messageService.add({severity:'info', summary:'Confirmed', detail:'You have accepted'});
-      },
-      reject: (type:any) => {
-        switch(type) {
-            case ConfirmEventType.REJECT:
-                this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
-            break;
-            case ConfirmEventType.CANCEL:
-                this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
-            break;
-        }
-      }
-    });
-
+    if(this.frmCtrlDescripcion.value!=null && this.frmCtrlCorreo.value!=null 
+      && this.frmCtrlDni.value!=null && this.frmCtrlRazonSocial.value != null && this.frmCtrlTelefono.value!=null){
+        console.log("Entro")
+        this.confirmationService.confirm({
+          message: '¿Seguro que quire registrar?',
+          header: 'Comfirmación',
+          icon: 'pi pi-exclamation-triangle',
+          accept: () => { 
+            let obj= new ReclamoRequest
+    
+                console.log("Descripcion",this.frmCtrlDescripcion.value)
+                obj.descripcion=this.frmCtrlDescripcion.value
+                obj.correo=this.frmCtrlCorreo.value
+                obj.dni=this.frmCtrlDni.value
+                obj.nameRazonSocial=this.frmCtrlRazonSocial.value
+                obj.telefono=this.frmCtrlTelefono.value
+                obj.estado="Pendiente"
+                this.reclamoService.registrarReclamo(obj).subscribe((resp:MessageReponse)=>{
+                  this.messageReponse=resp
+                  console.log("respuesta registro de reclamo",resp)
+                  this.displayModal=true
+                }) 
+                this.messageService.add({severity:'info', summary:'Confirmed', detail:'You have accepted'});
+    
+          },
+          reject: (type:any) => {
+            switch(type) {
+                case ConfirmEventType.REJECT:
+                    this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
+                break;
+                case ConfirmEventType.CANCEL:
+                    this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
+                break;
+            }
+          }
+        });
+     }else{
+        this.messageService.add({severity:'error', summary:'Campo Obliagtorios',detail:'Complete todos los campos'});
+    }
   
 
   }

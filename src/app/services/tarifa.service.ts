@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Tarifa } from '../model/Tarifa';
 import { Constantes } from '../utils/constantes';
-
+import { catchError, map,retry, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,13 +18,6 @@ export class TarifaService {
 
   }
 
-  // getTarifas(idCorredor: String): Observable<Tarifa[]>{
-  //     const ruta = environment.urlBase + Constantes.LISTA_TARIFAS_POR_CORREDOR
-  //     return this.http.get<Tarifa[]>(ruta+idCorredor)
-
-  // }
-
-
   obtenerTarifasgetTarifas(idCorredor: String): void {
      this.getTarifas(idCorredor).subscribe((resp:Tarifa[])=>{
        console.log(resp)
@@ -35,7 +28,15 @@ export class TarifaService {
 
   private getTarifas(idCorredor: String): Observable<Tarifa[]>{
     const ruta = environment.urlBase + Constantes.LISTA_TARIFAS_POR_CORREDOR
-     return this.http.get<Tarifa[]>(ruta+idCorredor)
+     return this.http.get<Tarifa[]>(ruta+idCorredor).pipe(
+      map((item:Tarifa[]) => {
+        return item
+      }),
+      catchError((error:HttpErrorResponse)=>{
+        console.log("error",error)
+        return throwError(error)
+      })
+    )
   } 
 
   // getTarifas$(): Observable<Tarifa[]> {

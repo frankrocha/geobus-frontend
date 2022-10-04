@@ -10,11 +10,13 @@
     </div>
     <div class="field col-12 md:col-4">
         <label for="class">Teléfono</label>
-        <input type="text" pInputText formControlName="telefono">         
+        <p-inputNumber inputId="integeronly" [useGrouping]="false"  formControlName="telefono"> 
+        </p-inputNumber>        
     </div>
     <div class="field col-12 md:col-4">
         <label for="wagon">DNI</label>
-        <input type="text" pInputText formControlName="dni">    
+        <p-inputNumber inputId="integeronly" [useGrouping]="false"   formControlName="dni">  
+        </p-inputNumber>      
     </div>
     <div class="field col-12 md:col-4">
         <label for="class">Nombre/Razón Social</label>
